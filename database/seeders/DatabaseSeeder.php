@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             ['content' => 'Contenido del mensaje 2',  'user_id' => 1, 'channel_id' => 4],
         ]);
 
-        DB::table('approbations')->insert([
+        DB::table('expulsions')->insert([
             ['user_id' => 1,  'channel_id' => 2],
         ]);
     }

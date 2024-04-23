@@ -59,8 +59,16 @@ class PostController extends Controller
         return response()->json(['data' => 'post deleted']);
     }
 
+
+    // Trae todos los post de un canal
     public function posts($ChannelId){
         $posts = Post::where('channel_id', $ChannelId)->where('is_active', true)->get();
+        return response()->json(['data' => $posts]);
+    }
+
+    // Trae todos los post de un usuario
+    public function postsUser($UserId){
+        $posts = Post::where('user_id', $UserId)->where('is_active', true)->get();
         return response()->json(['data' => $posts]);
     }
 }

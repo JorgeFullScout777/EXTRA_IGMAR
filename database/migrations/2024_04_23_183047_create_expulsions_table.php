@@ -15,7 +15,7 @@ return new class extends Migration
      // Esta tabla es para ver si un usuario esta aprobado para particiar en una comunidad, si no lo esta, no puede hacer nada
     public function up()
     {
-        Schema::create('approbations', function (Blueprint $table) {
+        Schema::create('expulsions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('channel_id')->constrained('channels')->onDelete('cascade');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('approbations');
+        Schema::dropIfExists('expulsions');
     }
 };

@@ -9,6 +9,8 @@ class approbation extends Model
 {
     use HasFactory;
 
+    protected $table = 'expulsions';
+
     protected $fillable = [
         'user_id',
         'community_id',

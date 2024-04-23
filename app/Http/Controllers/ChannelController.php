@@ -57,7 +57,8 @@ class ChannelController extends Controller
         return response()->json(['data' => 'channel deleted']);
     }
 
-    public function channels($id)
+    // Trae todos los canales de un usuario
+    public function channelsUser($id)
     {
         $channels = Channel::where('user_id', $id)->where('is_active', true)->get();
         return response()->json(['data' => $channels]);
