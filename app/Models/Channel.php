@@ -12,7 +12,6 @@ class Channel extends Model
     protected $fillable = [
         'user_id',
         'name', 
-        'community_id',
         'description'
     ];
 }

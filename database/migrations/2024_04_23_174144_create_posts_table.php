@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('title');
             $table->text('content');
-            $table->foreignId('community_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('channel_id')->constrained('channels')->onDelete('cascade');
             $table->timestamps();
         });
     }

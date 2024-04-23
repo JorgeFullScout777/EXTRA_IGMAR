@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('approbations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('community_id')->constrained('communities')->onDelete('cascade');
+            $table->foreignId('channel_id')->constrained('channels')->onDelete('cascade');
             $table->timestamps();
         });
     }
