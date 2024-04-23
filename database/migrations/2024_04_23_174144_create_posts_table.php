@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->foreignId('channel_id')->constrained('channels')->onDelete('cascade');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

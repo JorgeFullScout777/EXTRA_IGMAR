@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('channel')->group(function () {
     Route::get('/index', [ChannelController::class, 'index'])->name('channel.index');
-    Route::patch('/store', [ChannelController::class, 'store'])->name('channel.store');
-    Route::delete('/update', [ChannelController::class, 'update'])->name('channel.update');
-    Route::delete('/delete', [ChannelController::class, 'delete'])->name('channel.delete');
+    Route::post('/store', [ChannelController::class, 'store'])->name('channel.store');
+    Route::put('/update/{id}', [ChannelController::class, 'update'])->name('channel.update');
+    Route::delete('/delete/{id}', [ChannelController::class, 'delete'])->name('channel.delete');
 });
