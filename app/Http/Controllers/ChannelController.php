@@ -28,7 +28,10 @@ class ChannelController extends Controller
         return response()->json(['data' => $channel]);
     }
 
-    public function update(Request $request)
+    // Estás enviando la solicitud con el encabezado Content-Type establecido en multipart/form-data, que se utiliza generalmente para enviar archivos. 
+    // Sin embargo, tu controlador espera recibir los datos como JSON.
+    // Para solucionar este problema, debes cambiar el Content-Type a application/json y asegurarte de que los datos que estás enviando están en formato JSON.
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
@@ -38,7 +41,10 @@ class ChannelController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        $channel = Channel::find($request->id);
+        $channel = Channel::find($id);
+        if (!$channel) {
+            return response()->json(['error' => 'channel not found'], 404);
+        }
         $channel->update($request->all());
         return response()->json(['data' => $channel]);
     }
@@ -46,6 +52,9 @@ class ChannelController extends Controller
     public function delete($id)
     {
         $channel = Channel::find($id);
+        if (!$channel) {
+            return response()->json(['error' => 'channel not found'], 404);
+        }
         $channel->is_active = false;
         $channel->save();
         return response()->json(['data' => $channel]);
