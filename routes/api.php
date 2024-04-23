@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,12 @@ Route::prefix('post')->group(function () {
     Route::post('/store', [PostController::class, 'store'])->name('post.store');
     Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
     Route::delete('/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
+    Route::get('/posts/{id}', [PostController::class, 'posts'])->name('post.posts');
+});
+
+Route::prefix('comment')->group(function () {
+    Route::get('/index', [CommentController::class, 'index'])->name('comment.index');
+    Route::post('/store', [CommentController::class, 'store'])->name('comment.store');
+    Route::put('/update/{id}', [CommentController::class, 'update'])->name('comment.update');
+    Route::delete('/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
 });

@@ -58,4 +58,9 @@ class PostController extends Controller
         $post->save();
         return response()->json(['data' => $post]);
     }
+
+    public function posts($ChannelId){
+        $posts = Post::where('channel_id', $ChannelId)->where('is_active', true)->get();
+        return response()->json(['data' => $posts]);
+    }
 }

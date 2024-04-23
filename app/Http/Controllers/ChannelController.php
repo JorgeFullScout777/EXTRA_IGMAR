@@ -28,9 +28,6 @@ class ChannelController extends Controller
         return response()->json(['data' => $channel]);
     }
 
-    // Estás enviando la solicitud con el encabezado Content-Type establecido en multipart/form-data, que se utiliza generalmente para enviar archivos. 
-    // Sin embargo, tu controlador espera recibir los datos como JSON.
-    // Para solucionar este problema, debes cambiar el Content-Type a application/json y asegurarte de que los datos que estás enviando están en formato JSON.
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -59,4 +56,5 @@ class ChannelController extends Controller
         $channel->save();
         return response()->json(['data' => $channel]);
     }
+    
 }
