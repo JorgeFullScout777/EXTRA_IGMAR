@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
+    // trae todos los comentarios activos
     public function index()
     {
         $comments = Comment::where('is_active', true)->get();
@@ -57,6 +58,7 @@ class CommentController extends Controller
         return response()->json(['data' => 'comment deleted']);
     }
 
+    // trae todos los comentarios activos de un post
     public function comments($id)
     {
         $comments = Comment::where('post_id', $id)->where('is_active', true)->get();

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ChannelController extends Controller
 {
+    // trae todos los canales activos
     public function index()
     {
         $channels = Channel::where('is_active', true)->get();

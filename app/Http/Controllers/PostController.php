@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+    // trae todos los posts activos
     public function index()
     {
         $posts = Post::where('is_active', true)->get();
