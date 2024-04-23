@@ -6,6 +6,7 @@ use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ExpulsionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,6 @@ Route::middleware('auth')->group(function () {
 // Los datos de las rutas put/update se tienen que enviar con el Content-Type: application/json
 
 Route::prefix('channel')->group(function () {
-
     Route::get('/index', [ChannelController::class, 'index'])->name('channel.index');
     Route::post('/store', [ChannelController::class, 'store'])->name('channel.store');
     Route::put('/update/{id}', [ChannelController::class, 'update'])->name('channel.update');
@@ -39,6 +39,7 @@ Route::prefix('channel')->group(function () {
 });
 
 Route::prefix('post')->group(function () {
+    Route::get('/show', [PostController::class, 'show'])->name('post.show');
     Route::get('/index', [PostController::class, 'index'])->name('post.index');
     Route::post('/store', [PostController::class, 'store'])->name('post.store');
     Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
@@ -61,4 +62,12 @@ Route::prefix('message')->group(function () {
     Route::put('/update/{id}', [MessageController::class, 'update'])->name('message.update');
     Route::delete('/delete/{id}', [MessageController::class, 'delete'])->name('message.delete');
     Route::get('/messages/{id}', [MessageController::class, 'messages'])->name('message.messages');
+});
+
+Route::prefix('expulsion')->group(function () {
+    Route::get('/index/{id}', [ExpulsionController::class, 'index'])->name('expulsion.index');
+    Route::post('/store', [ExpulsionController::class, 'store'])->name('expulsion.store');
+    Route::put('/update/{id}', [ExpulsionController::class, 'update'])->name('expulsion.update');
+    Route::delete('/delete/{id}', [ExpulsionController::class, 'delete'])->name('expulsion.delete');
+    Route::get('/expulsions/{id}', [ExpulsionController::class, 'expulsions'])->name('expulsion.expulsions');
 });

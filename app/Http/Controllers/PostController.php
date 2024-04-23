@@ -72,4 +72,13 @@ class PostController extends Controller
         $posts = Post::where('user_id', $UserId)->where('is_active', true)->get();
         return response()->json(['data' => $posts]);
     }
+
+    //Trae la informacion de un post
+    public function show($id){
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->json(['error' => 'post not found'], 404);
+        }
+        return response()->json(['data' => $post]);
+    }
 }
