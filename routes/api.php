@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::prefix('channel')->group(function () {
     Route::post('/store', [ChannelController::class, 'store'])->name('channel.store');
     Route::put('/update/{id}', [ChannelController::class, 'update'])->name('channel.update');
     Route::delete('/delete/{id}', [ChannelController::class, 'delete'])->name('channel.delete');
+    Route::get('/channels/{id}', [ChannelController::class, 'channels'])->name('channel.channels');
 });
 
 Route::prefix('post')->group(function () {
@@ -49,4 +51,12 @@ Route::prefix('comment')->group(function () {
     Route::put('/update/{id}', [CommentController::class, 'update'])->name('comment.update');
     Route::delete('/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
     Route::get('/comments/{id}', [CommentController::class, 'comments'])->name('comment.comments');
+});
+
+Route::prefix('message')->group(function () {
+    Route::get('/index', [MessageController::class, 'index'])->name('message.index');
+    Route::post('/store', [MessageController::class, 'store'])->name('message.store');
+    Route::put('/update/{id}', [MessageController::class, 'update'])->name('message.update');
+    Route::delete('/delete/{id}', [MessageController::class, 'delete'])->name('message.delete');
+    Route::get('/messages/{id}', [MessageController::class, 'messages'])->name('message.messages');
 });
