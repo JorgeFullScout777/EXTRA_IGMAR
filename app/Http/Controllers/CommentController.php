@@ -54,6 +54,12 @@ class CommentController extends Controller
         }
         $comment->is_active = false;
         $comment->save();
-        return response()->json(['data' => $comment]);
+        return response()->json(['data' => 'comment deleted']);
+    }
+
+    public function comments($id)
+    {
+        $comments = Comment::where('post_id', $id)->where('is_active', true)->get();
+        return response()->json(['data' => $comments]);
     }
 }

@@ -54,7 +54,7 @@ class ChannelController extends Controller
         }
         $channel->is_active = false;
         $channel->save();
-        return response()->json(['data' => $channel]);
+        return response()->json(['data' => 'channel deleted']);
     }
-    
+
 }

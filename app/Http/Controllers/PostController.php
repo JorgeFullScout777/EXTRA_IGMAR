@@ -56,7 +56,7 @@ class PostController extends Controller
         }
         $post->is_active = false;
         $post->save();
-        return response()->json(['data' => $post]);
+        return response()->json(['data' => 'post deleted']);
     }
 
     public function posts($ChannelId){

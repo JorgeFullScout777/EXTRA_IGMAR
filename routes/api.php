@@ -48,4 +48,5 @@ Route::prefix('comment')->group(function () {
     Route::post('/store', [CommentController::class, 'store'])->name('comment.store');
     Route::put('/update/{id}', [CommentController::class, 'update'])->name('comment.update');
     Route::delete('/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
+    Route::get('/comments/{id}', [CommentController::class, 'comments'])->name('comment.comments');
 });
