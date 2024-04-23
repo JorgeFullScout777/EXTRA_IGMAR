@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Validator;
@@ -69,16 +70,17 @@ class PostController extends Controller
 
     // Trae todos los post de un usuario
     public function postsUser($UserId){
-        $posts = Post::where('user_id', $UserId)->where('is_active', true)->get();
+        $posts = Post::where('user_id', $UserId)->get();
         return response()->json(['data' => $posts]);
     }
 
     //Trae la informacion de un post
     public function show($id){
         $post = Post::find($id);
+        $comentarios = Comment::where('post_id', $id)->where('is_active', true)->get();
         if (!$post) {
             return response()->json(['error' => 'post not found'], 404);
         }
-        return response()->json(['data' => $post]);
+        return response()->json(['data' => $post,'comments'=>$comentarios]);
     }
 }
