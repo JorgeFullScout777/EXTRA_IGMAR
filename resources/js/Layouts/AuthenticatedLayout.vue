@@ -28,12 +28,6 @@ const showingNavigationDropdown = ref(false);
                                     Principal
                                 </NavLink>
                             </div>
-
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('canales')" :active="route().current('canales')">
-                                    Canales De discucion
-                                </NavLink>
-                            </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('mispublicaciones')" :active="route().current('mispublicaciones')" >
                                     Mis Publicaciones

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Channel;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 class ChannelController extends Controller
 {
@@ -12,7 +13,7 @@ class ChannelController extends Controller
     public function index()
     {
         $channels = Channel::where('is_active', true)->get();
-        return response()->json(['data' => $channels]);
+        return Inertia::render('Dashboard', ['channels' => $channels]);
     }
 
     public function store(Request $request)
@@ -63,6 +64,15 @@ class ChannelController extends Controller
     {
         $channels = Channel::where('user_id', $id)->where('is_active', true)->get();
         return response()->json(['data' => $channels]);
+    }
+
+    // Trae la informacion de un solo channel
+    public function show($id){
+        $channel = Channel::find($id);
+        if(!$channel){
+            return response()->json(['error' => 'channel not found']);
+        }
+        return response()->json(['data' => $channel]);
     }
 
 }
