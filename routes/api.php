@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ExpulsionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::prefix('channel')->group(function () {
 });
 
 Route::prefix('post')->group(function () {
-    Route::get('/show', [PostController::class, 'show'])->name('post.show');
+    Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
     Route::get('/index', [PostController::class, 'index'])->name('post.index');
     Route::post('/store', [PostController::class, 'store'])->name('post.store');
     Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
@@ -70,4 +71,12 @@ Route::prefix('expulsion')->group(function () {
     Route::put('/update/{id}', [ExpulsionController::class, 'update'])->name('expulsion.update');
     Route::delete('/delete/{id}', [ExpulsionController::class, 'delete'])->name('expulsion.delete');
     Route::get('/expulsions/{id}', [ExpulsionController::class, 'expulsions'])->name('expulsion.expulsions');
+});
+
+Route::prefix('user')->group(function () {
+    Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/index', [UserController::class, 'index'])->name('user.index');
+    Route::post('/store', [UserController::class, 'store'])->name('user.store');
+    Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 });
