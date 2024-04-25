@@ -52,7 +52,17 @@ export default {
                         console.log(error);
                     });
             }, 3000);
-        }
+        },
+        deletePost(post) {
+            axios.delete(route('channel.delete', { id: post.id }))
+                .then(response => {
+                    console.log('post desactivado:', response.data);
+                    this.getChannels();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
     },
     mounted() {
         this.pollRoute();
