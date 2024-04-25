@@ -7,6 +7,7 @@ import { Head } from '@inertiajs/vue3';
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 " style="text-align: center;">Canales</h2>
+            <a :href="route('channel.crear', { id: $page.props.auth.user.id })"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Crear</button></a>
         </template>
 
         <div class="py-12">

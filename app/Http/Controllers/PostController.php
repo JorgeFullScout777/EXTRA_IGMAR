@@ -65,8 +65,14 @@ class PostController extends Controller
     // Trae todos los post de un canal
     public function posts($ChannelId){
         $posts = Post::where('channel_id', $ChannelId)->where('is_active', true)->get();
-        return Inertia::render('Posts', ['posts' => $posts]);
+        return Inertia::render('Posts', ['posts' => $posts, 'channel_id' => $ChannelId]);
     }
+
+    public function posts_json($ChannelId){
+        $posts = Post::where('channel_id', $ChannelId)->where('is_active', true)->get();
+        return response()->json(['posts' => $posts, 'channel_id' => $ChannelId]);
+    }
+
 
     // Trae todos los post de un usuario
     public function postsUser($UserId){

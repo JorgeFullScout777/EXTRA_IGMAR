@@ -26,20 +26,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth')->group(function () {
 
-
-    
-    Route::prefix('channel')->group(function () {
-        Route::get('/index', [ChannelController::class, 'index'])->name('channel.index');
-        Route::post('/store', [ChannelController::class, 'store'])->name('channel.store');
-        Route::put('/update/{id}', [ChannelController::class, 'update'])->name('channel.update');
-        Route::delete('/delete/{id}', [ChannelController::class, 'delete'])->name('channel.delete');
-        Route::get('/channels/user/{id}', [ChannelController::class, 'channelsUser'])->name('channel.channelsUser');
-    });
-    
-    
-
-
-
 });
 
 

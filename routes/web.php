@@ -35,12 +35,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[ChannelController::class, 'index'])->name('dashboard');
 
     Route::prefix('post')->group(function () {
+        Route::get('/crear/{id}', function($id) {
+            return Inertia::render('CrearPost', ['channel_id' => $id]);
+        })->name('post.crear');
         Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
         Route::get('/index', [PostController::class, 'index'])->name('post.index');
         Route::post('/store', [PostController::class, 'store'])->name('post.store');
         Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
         Route::delete('/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
         Route::get('/posts/{id}', [PostController::class, 'posts'])->name('post.posts');
+        Route::get('/posts/json/{id}', [PostController::class, 'posts_json'])->name('post.posts.json');
         Route::get('/posts/user/{id}', [PostController::class, 'postsUser'])->name('post.postsUser');
     });
 
@@ -50,6 +54,16 @@ Route::middleware('auth')->group(function () {
         Route::put('/update/{id}', [CommentController::class, 'update'])->name('comment.update');
         Route::delete('/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
         Route::get('/comments/{id}', [CommentController::class, 'comments'])->name('comment.comments');
+    });
+
+    Route::prefix('channel')->group(function () {
+        Route::get('/crear/{id}', function($id) {
+            return Inertia::render('CrearCanal', ['user_id' => $id]);
+        })->name('channel.crear');        Route::get('/index', [ChannelController::class, 'index'])->name('channel.index');
+        Route::post('/store', [ChannelController::class, 'store'])->name('channel.store');
+        Route::put('/update/{id}', [ChannelController::class, 'update'])->name('channel.update');
+        Route::delete('/delete/{id}', [ChannelController::class, 'delete'])->name('channel.delete');
+        Route::get('/channels/user/{id}', [ChannelController::class, 'channelsUser'])->name('channel.channelsUser');
     });
 
 
