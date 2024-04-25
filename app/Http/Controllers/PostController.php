@@ -83,7 +83,7 @@ class PostController extends Controller
     //Trae la informacion de un post
     public function show($id){
 
-        $post = Post::select('posts.id', 'users.name as username', 'posts.title', 'posts.content', 'posts.created_at')
+        $post = Post::select('posts.id', 'users.id as user_id','users.name as username', 'posts.title', 'posts.content', 'posts.created_at')
                     ->join('users', 'users.id', '=', 'posts.user_id')
                     ->where('posts.id', $id)
                     ->first();
