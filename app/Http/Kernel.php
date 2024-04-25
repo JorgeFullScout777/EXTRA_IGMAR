@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'canal.isactive' => \App\Http\Middleware\CanalIsActive::class,
         'user.isactive' => \App\Http\Middleware\UserIsActive::class,
         'post.isactive' => \App\Http\Middleware\PostIsActive::class,
+        'isactive' => \App\Http\Middleware\IsActiveMiddleware::class,
     ];
 }

@@ -72,7 +72,6 @@ import { Head } from '@inertiajs/vue3';
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <button @click="editChannel(user)" class="text-indigo-600 hover:text-indigo-900">Editar</button>
                                     <button v-if="user.is_active" @click="deleteChannel(user)" class="text-red-600 hover:text-red-900">Desactivar</button>
                                     <button v-if="!user.is_active" @click="enableChannel(user)" class="text-green-600 hover:text-red-900">Activar</button>
                                 </td>

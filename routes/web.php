@@ -32,7 +32,7 @@ Route::get('/', function () {
 });
 
 // NO SUPE EN QUE PARTE VERIFICAR SI EL USUARIO ESTÁ ACTIVO A LA HORA DE INICIAR SESIÓN, ASI QUE LO HICE UN MIDDLEWARE XD
-Route::middleware(['auth', 'user.isactive'])->group(function () {
+Route::middleware(['auth', 'user.isactive', 'isactive'])->group(function () {
 
     // ES SOLO UNA PRUEBA PARA SABER EL ROL_ID DEL USUARIO
     Route::get('/userAdmin', function() {
