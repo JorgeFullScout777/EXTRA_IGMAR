@@ -59,12 +59,12 @@ class PostController extends Controller
         if (!$post) {
             return response()->json(['error' => 'post not found'], 404);
         }
-        if($post->user_id != auth()->user()->id || auth()->user()->role_id != 1){
-            return response()->json(['error' => 'user is not the owner of the post'], 403);
+        if($post->user_id == auth()->user()->id || auth()->user()->role_id == 1){
+            $post->is_active = false;
+            $post->save();
+            return response()->json(['data' => 'post deleted']);
         }
-        $post->is_active = false;
-        $post->save();
-        return response()->json(['data' => 'post deleted']);
+        return response()->json(['error' => 'user is not the owner of the post'], 403);
     }
 
 
@@ -74,8 +74,18 @@ class PostController extends Controller
         return Inertia::render('Posts', ['posts' => $posts, 'channel_id' => $ChannelId]);
     }
 
+    public function posts_admin($ChannelId){
+        $posts = Post::all()->where('channel_id', $ChannelId);
+        return Inertia::render('PostsCanalesAdmin', ['posts' => $posts, 'channel_id' => $ChannelId]);
+    }
+
     public function posts_json($ChannelId){
         $posts = Post::where('channel_id', $ChannelId)->where('is_active', true)->get();
+        return response()->json(['posts' => $posts, 'channel_id' => $ChannelId]);
+    }
+
+    public function posts_json_all($ChannelId){
+        $posts = Post::where('channel_id', $ChannelId)->get();
         return response()->json(['posts' => $posts, 'channel_id' => $ChannelId]);
     }
 
@@ -123,5 +133,15 @@ class PostController extends Controller
             return response()->json(['error' => 'post not found'], 404);
         }
         return response()->json(['post' => $post, 'comments'=>$comentarios]);
+    }
+
+    public function enable($id){
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->json(['error' => 'post not found'], 404);
+        }
+        $post->is_active = true;
+        $post->save();
+        return response()->json(['data' => 'post enabled']);
     }
 }

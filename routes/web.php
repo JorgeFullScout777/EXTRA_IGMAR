@@ -50,22 +50,26 @@ Route::middleware(['auth', 'user.isactive'])->group(function () {
         // MIDDLEWARE PARA VERIFICAR SI EL CANAL DE LOS POSTS ESTÁ ACTIVO
         Route::middleware('canal.isactive')->group(function () {
             Route::get('/posts/{id}', [PostController::class, 'posts'])->name('post.posts');
+            Route::get('/posts/admin/{id}', [PostController::class, 'posts_admin'])->name('post.posts.admin');
         });
         Route::middleware('post.isactive')->group(function () {
             Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
             Route::get('/show/json/{id}', [PostController::class, 'show_json'])->name('post.show.json');
+            Route::get('/show/json/admin/{id}', [PostController::class, 'show_json_admin'])->name('post.show.json.admin');
         });
 
         // RUTAS POSTS PARA CUALQUIER USUARIO, CADA UNA TIENE VALIDACIONES
 
         Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
         Route::get('/posts/json/{id}', [PostController::class, 'posts_json'])->name('post.posts.json');
+        Route::get('/posts/json/all/{id}', [PostController::class, 'posts_json_all'])->name('post.posts.json.all');
         Route::get('/crear/{id}', function($id) {
             return Inertia::render('CrearPost', ['channel_id' => $id]);
         })->name('post.crear');
         Route::get('/index', [PostController::class, 'index'])->name('post.index');
         Route::post('/store', [PostController::class, 'store'])->name('post.store');
         Route::delete('/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
+        Route::put('/enable/{id}', [PostController::class, 'enable'])->name('post.enable');
         Route::get('/posts/user/{id}', [PostController::class, 'postsUser'])->name('post.posts.user');
     });
 

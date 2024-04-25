@@ -19,7 +19,8 @@ import { Head } from '@inertiajs/vue3';
                     <ul>
                         <li v-for="post in posts2" :key="post.id">
                             <a :href="route('post.show', { id: post.id })">{{ post.title }}</a>
-                                <button @click="deletePost(post)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded float-right">Eliminar</button>
+                            <button v-if="post.is_active" @click="deletePost(post)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded float-right">Desactivar</button>
+                            <button v-if="!post.is_active" @click="enablePost(post)" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded float-right">Activar</button>
                             <p class="border-t border-gray-200 mt-4"></p>
                         </li>
                     </ul>
@@ -45,22 +46,31 @@ export default {
     },
     methods:{
         pollRoute() {
-            this.pollInterval = setInterval(() => {
-                axios.get(route('post.posts.json', { id: this.channel_id }))
-                    .then(response => {
-                        console.log(response.data);
-                        this.posts2 = response.data.posts;
-                    })
-                    .catch(error => {
-                        console.log('mundo');
-                        console.log(error);
-                    });
-            }, 3000);
+            axios.get(route('post.posts.json.all', { id: this.channel_id }))
+                .then(response => {
+                    console.log(response.data);
+                    this.posts2 = response.data.posts;
+                })
+                .catch(error => {
+                    console.log('mundo');
+                    console.log(error);
+                });
         },
         deletePost(post) {
             axios.delete(route('post.delete', { id: post.id }))
                 .then(response => {
                     console.log('Post eliminado:', response.data);
+                    location.reload();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        enablePost(post) {
+            axios.put(route('post.enable', { id: post.id }))
+                .then(response => {
+                    console.log('Post activado:', response.data);
+                    location.reload();
                 })
                 .catch(error => {
                     console.log(error);
@@ -70,8 +80,5 @@ export default {
     mounted() {
         this.pollRoute();
     },
-    beforeUnmount() {
-        clearInterval(this.pollInterval);
-    }
 }
 </script>

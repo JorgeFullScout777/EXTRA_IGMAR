@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 
 defineProps({
     canResetPassword: Boolean,
@@ -80,6 +81,8 @@ const submit = () => {
                 >
                     Forgot your password?
                 </Link>
+
+                <a href="/"><SecondaryButton>Back</SecondaryButton></a>
 
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Log in

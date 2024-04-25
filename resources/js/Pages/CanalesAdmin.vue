@@ -44,7 +44,7 @@ import { Head } from '@inertiajs/vue3';
                                     <div class="flex items-center">
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
-                                                {{ channel.name }}
+                                                <a :href="route('post.posts.admin', channel.id)"> {{ channel.name }}</a>
                                             </div>
                                         </div>
                                     </div>

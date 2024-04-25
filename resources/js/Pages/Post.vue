@@ -58,6 +58,8 @@ import { Head, router } from '@inertiajs/vue3';
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { router } from '@inertiajs/vue3'
+
 export default {
     props: {
         post:Object,
@@ -96,7 +98,10 @@ export default {
                         this.comments2 = response.data.comments;
                     })
                     .catch(error => {
+
+                        router.get(route('channel.index'))
                         console.error('Error while polling:', error);
+
                     });
             }, 3000);
         },
