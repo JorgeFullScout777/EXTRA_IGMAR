@@ -59,6 +59,9 @@ class PostController extends Controller
         if (!$post) {
             return response()->json(['error' => 'post not found'], 404);
         }
+        if($post->user_id != auth()->user()->id || auth()->user()->role_id != 1){
+            return response()->json(['error' => 'user is not the owner of the post'], 403);
+        }
         $post->is_active = false;
         $post->save();
         return response()->json(['data' => 'post deleted']);
