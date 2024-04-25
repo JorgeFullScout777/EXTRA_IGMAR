@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::where('is_active', true)->get();
+        $users = User::all();
         return response()->json(['data' => $users]);
     }
 
