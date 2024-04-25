@@ -26,7 +26,7 @@ class PostIsActive
                 return $next($request);
             }
             if (!$post->is_active){
-                return response()->json(['error' => 'post is not active'], 404);
+                return route('channel.index');
             }
         }
         return $next($request);

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use App\Models\Channel;
+
 class PostController extends Controller
 {
     // trae todos los posts activos
@@ -75,6 +77,12 @@ class PostController extends Controller
     }
 
     public function posts_admin($ChannelId){
+        $channel = Channel::find($ChannelId);
+        if ($channel) {
+            if (!$channel->is_active) {
+                return redirect()->route('channel.index');
+            }
+        }
         $posts = Post::all()->where('channel_id', $ChannelId);
         return Inertia::render('PostsCanalesAdmin', ['posts' => $posts, 'channel_id' => $ChannelId]);
     }

@@ -19,7 +19,7 @@ import { Head } from '@inertiajs/vue3';
                     <ul>
                         <li v-for="post in posts2" :key="post.id">
                             <a :href="route('post.show', { id: post.id })">{{ post.title }}</a>
-                                <button @click="deletePost(post)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded float-right">Eliminar</button>
+                                <button v-if="$page.props.auth.user.role_id == 1 || post.user_id == $page.props.auth.user.id" @click="deletePost(post)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded float-right">Eliminar</button>
                             <p class="border-t border-gray-200 mt-4"></p>
                         </li>
                     </ul>

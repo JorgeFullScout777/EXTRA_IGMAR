@@ -26,7 +26,7 @@ class CanalIsActive
                 return $next($request);
             }
             if (!$channel->is_active){
-                return response()->json(['error' => 'channel is not active'], 404);
+                return redirect()->route('channel.index');
             }
         }
         return $next($request);
