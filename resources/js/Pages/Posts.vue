@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 </script>
 <template>
     <Head title="Posts" />
@@ -53,6 +53,7 @@ export default {
                     })
                     .catch(error => {
                         console.log('mundo');
+                        router.get(route('channel.index'))
                         console.log(error);
                     });
             }, 3000);
@@ -64,6 +65,7 @@ export default {
                 })
                 .catch(error => {
                     console.log(error);
+
                 });
         }
     },

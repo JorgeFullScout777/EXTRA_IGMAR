@@ -29,11 +29,11 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                             </div>
 
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <!-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('channel.user')" :active="route().current('channel.user')" >
                                     Mis canales
                                 </NavLink>
-                            </div>
+                            </div> -->
 
                             <div v-if="$page.props.auth.user.role_id == 1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('channel.admin')" :active="route().current('channel.admin')" >

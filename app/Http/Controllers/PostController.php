@@ -8,7 +8,6 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use App\Models\Channel;
-
 class PostController extends Controller
 {
     // trae todos los posts activos
@@ -77,17 +76,17 @@ class PostController extends Controller
     }
 
     public function posts_admin($ChannelId){
-        $channel = Channel::find($ChannelId);
-        if ($channel) {
-            if (!$channel->is_active) {
-                return redirect()->route('channel.index');
-            }
-        }
         $posts = Post::all()->where('channel_id', $ChannelId);
         return Inertia::render('PostsCanalesAdmin', ['posts' => $posts, 'channel_id' => $ChannelId]);
     }
 
     public function posts_json($ChannelId){
+        $channel = Channel::find($ChannelId);
+        if ($channel) {
+            if (!$channel->is_active) {
+                return response()->json(['error' => 'el canal esta desactivado'], 403);
+            }
+        }
         $posts = Post::where('channel_id', $ChannelId)->where('is_active', true)->get();
         return response()->json(['posts' => $posts, 'channel_id' => $ChannelId]);
     }
