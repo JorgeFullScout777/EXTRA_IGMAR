@@ -36,8 +36,6 @@ class PostController extends Controller
         $validate = Validator::make($request->all(), [
             'title' => 'required|max:100',
             'content' => 'required|max:200',
-            'user_id' => 'required',
-            'channel_id' => 'required'
         ]);
         if ($validate->fails()) {
             return response()->json($validate->errors(), 422);
@@ -46,7 +44,12 @@ class PostController extends Controller
         if (!$post) {
             return response()->json(['error' => 'post not found'], 404);
         }
-        $post->update($request->all());
+        if($post->user_id != auth()->user()->id){
+            return response()->json(['error' => 'user is not the owner of the post'], 403);
+        }
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
         return response()->json(['data' => $post]);
     }
 

@@ -17,6 +17,7 @@ import { Head } from '@inertiajs/vue3';
                         <li v-for="channel in channels2" :key="channel.id">
                             <a :href="route('post.posts', { id: channel.id })">{{ channel.name }}</a>
                             <p>{{ channel.description }}</p>
+                            <button v-if="!user.is_active" @click="enableChannel(user)" class="text-green-600 hover:text-red-900">Activar</button>
                             <p class="border-t border-gray-200 mt-4"></p>
                         </li>
                     </ul>

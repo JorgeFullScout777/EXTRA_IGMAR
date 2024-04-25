@@ -59,9 +59,8 @@ import { Head } from '@inertiajs/vue3';
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <button @click="editChannel(channel)" class="text-indigo-600 hover:text-indigo-900">Editar</button>
-                                    <button v-if="channel.is_active" @click="deleteChannel(channel)" class="text-red-600 hover:text-red-900">Desactivar</button>
-                                    <!-- <button v-if="!channel.is_active" @click="enableChannel(channel)" class="text-green-600 hover:text-red-900">Activar</button> -->
+                                    <button @click="editChannel()" class="text-indigo-600 hover:text-indigo-900">Editar</button>
+                                    <button v-if="channel.is_active" @click="deleteChannel(channel)" class="text-red-600 hover:text-red-900">Eliminar</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -80,10 +79,10 @@ export default {
     },
     methods:{
         getChannels() {
-            axios.get(route('channel.index.json.admin'))
+            axios.get(route('channel.channels.user', { id: this.$page.props.auth.user.id }))
                 .then(response => {
                     console.log(response.data);
-                    this.channels = response.data.channels;
+                    this.channels = response.data.data;
                 })
                 .catch(error => {
                     console.log(error);
@@ -102,16 +101,6 @@ export default {
                     console.log(error);
                 });
         },
-        enableChannel(channel) {
-            axios.put(route('channel.enable', { id: channel.id }))
-                .then(response => {
-                    console.log('Canal activado:', response.data);
-                    this.getChannels();
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
     },
     mounted() {
         this.getChannels();
