@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert([
             ['name' => 'JorgeFullScout',  'email' => 'jorgefullscout@gmail.com',  'password' => Hash::make('password'), 'role_id' => 1],
-            ['name' => 'Maria Fernanda',  'email' => 'maria.fernanda@gmail.com',  'password' => Hash::make('password'), 'role_id' => 2],
+            ['name' => 'Diana',  'email' => 'diana.itzel@gmail.com',  'password' => Hash::make('password'), 'role_id' => 2],
         ]);
 
         // DB::table('communities')->insert([
@@ -28,11 +28,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         DB::table('channels')->insert([
-            ['name' => 'Laravel Channel 1',  'description' => 'Descripcion del canal 1', 'user_id' => 1],
-            ['name' => 'Laravel Channel 2',  'description' => 'Descripcion del canal 2', 'user_id' => 1],
+            ['name' => 'Laravel Channel',  'description' => 'Descripcion del canal 1', 'user_id' => 1],
 
-            ['name' => 'Vue Channel 1',  'description' => 'Descripcion del canal 1', 'user_id' => 2],
-            ['name' => 'Vue Channel 2',  'description' => 'Descripcion del canal 2', 'user_id' => 2],
+            ['name' => 'Vue Channel',  'description' => 'Descripcion del canal 1', 'user_id' => 2],
         ]);
 
         DB::table('posts')->insert([
@@ -45,19 +43,19 @@ class DatabaseSeeder extends Seeder
 
         DB::table('comments')->insert([
             ['content' => 'Contenido del comentario 1 comunidad laravel',  'post_id' => 1, 'user_id' => 1],
-            ['content' => 'Contenido del comentario 2 comunidad laravel',  'post_id' => 1, 'user_id' => 1],
+            ['content' => 'Contenido del comentario 2 comunidad laravel',  'post_id' => 1, 'user_id' => 2],
 
-            ['content' => 'Contenido del comentario 1 comunidad vue',  'post_id' => 2, 'user_id' => 2],
-            ['content' => 'Contenido del comentario 2 comunidad vue',  'post_id' => 2, 'user_id' => 2],
+            ['content' => 'Contenido del comentario 1 comunidad vue',  'post_id' => 3, 'user_id' => 2],
+            ['content' => 'Contenido del comentario 2 comunidad vue',  'post_id' => 4, 'user_id' => 1],
         ]);
 
-        DB::table('messages')->insert([
-            ['content' => 'Contenido del mensaje 1',  'user_id' => 1, 'channel_id' => 1],
-            ['content' => 'Contenido del mensaje 2',  'user_id' => 2, 'channel_id' => 2],
+        // DB::table('messages')->insert([
+        //     ['content' => 'Contenido del mensaje 1',  'user_id' => 1, 'channel_id' => 1],
+        //     ['content' => 'Contenido del mensaje 2',  'user_id' => 2, 'channel_id' => 2],
 
-            ['content' => 'Contenido del mensaje 1',  'user_id' => 2, 'channel_id' => 3],
-            ['content' => 'Contenido del mensaje 2',  'user_id' => 1, 'channel_id' => 4],
-        ]);
+        //     ['content' => 'Contenido del mensaje 1',  'user_id' => 2, 'channel_id' => 3],
+        //     ['content' => 'Contenido del mensaje 2',  'user_id' => 1, 'channel_id' => 4],
+        // ]);
 
         DB::table('expulsions')->insert([
             ['user_id' => 1,  'channel_id' => 2],

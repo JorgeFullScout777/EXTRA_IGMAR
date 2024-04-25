@@ -27,35 +27,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth')->group(function () {
 
 
+    
+    Route::prefix('channel')->group(function () {
+        Route::get('/index', [ChannelController::class, 'index'])->name('channel.index');
+        Route::post('/store', [ChannelController::class, 'store'])->name('channel.store');
+        Route::put('/update/{id}', [ChannelController::class, 'update'])->name('channel.update');
+        Route::delete('/delete/{id}', [ChannelController::class, 'delete'])->name('channel.delete');
+        Route::get('/channels/user/{id}', [ChannelController::class, 'channelsUser'])->name('channel.channelsUser');
+    });
+    
+    
+
+
+
 });
+
 
 // Los datos de las rutas put/update se tienen que enviar con el Content-Type: application/json
 
-Route::prefix('channel')->group(function () {
-    Route::get('/index', [ChannelController::class, 'index'])->name('channel.index');
-    Route::post('/store', [ChannelController::class, 'store'])->name('channel.store');
-    Route::put('/update/{id}', [ChannelController::class, 'update'])->name('channel.update');
-    Route::delete('/delete/{id}', [ChannelController::class, 'delete'])->name('channel.delete');
-    Route::get('/channels/user/{id}', [ChannelController::class, 'channelsUser'])->name('channel.channelsUser');
-});
 
-Route::prefix('post')->group(function () {
-    Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
-    Route::get('/index', [PostController::class, 'index'])->name('post.index');
-    Route::post('/store', [PostController::class, 'store'])->name('post.store');
-    Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
-    Route::delete('/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
-    Route::get('/posts/{id}', [PostController::class, 'posts'])->name('post.posts');
-    Route::get('/posts/user/{id}', [PostController::class, 'postsUser'])->name('post.postsUser');
-});
-
-Route::prefix('comment')->group(function () {
-    Route::get('/index', [CommentController::class, 'index'])->name('comment.index');
-    Route::post('/store', [CommentController::class, 'store'])->name('comment.store');
-    Route::put('/update/{id}', [CommentController::class, 'update'])->name('comment.update');
-    Route::delete('/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
-    Route::get('/comments/{id}', [CommentController::class, 'comments'])->name('comment.comments');
-});
 
 /*
 Route::prefix('message')->group(function () {

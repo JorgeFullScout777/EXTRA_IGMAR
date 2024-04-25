@@ -65,7 +65,7 @@ class PostController extends Controller
     // Trae todos los post de un canal
     public function posts($ChannelId){
         $posts = Post::where('channel_id', $ChannelId)->where('is_active', true)->get();
-        return response()->json(['data' => $posts]);
+        return Inertia::render('Posts', ['posts' => $posts]);
     }
 
     // Trae todos los post de un usuario
@@ -76,11 +76,21 @@ class PostController extends Controller
 
     //Trae la informacion de un post
     public function show($id){
-        $post = Post::find($id);
-        $comentarios = Comment::where('post_id', $id)->where('is_active', true)->get();
+
+        $post = Post::select('posts.id', 'users.name as username', 'posts.title', 'posts.content', 'posts.created_at')
+                    ->join('users', 'users.id', '=', 'posts.user_id')
+                    ->where('posts.id', $id)
+                    ->first();
+
+        $comentarios = Comment::select('comments.id', 'users.name as username', 'comments.content', 'comments.created_at')
+                ->join('users', 'users.id', '=', 'comments.user_id')
+                ->where('comments.post_id', $id)
+                ->where('comments.is_active', true)
+                ->get();
+
         if (!$post) {
             return response()->json(['error' => 'post not found'], 404);
         }
-        return Inertia::render('post/publicacion', ['post' => $post,'comments'=>$comentarios]);
+        return Inertia::render('Post', ['post' => $post, 'comments'=>$comentarios]);
     }
 }
