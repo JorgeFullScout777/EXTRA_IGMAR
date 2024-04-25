@@ -28,11 +28,19 @@ const showingNavigationDropdown = ref(false);
                                     Principal
                                 </NavLink>
                             </div>
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('mispublicaciones')" :active="route().current('mispublicaciones')" >
-                                    Mis Publicaciones
+
+                            <div v-if="$page.props.auth.user.role_id == 1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('channel.admin')" :active="route().current('channel.admin')" >
+                                    Canales
                                 </NavLink>
                             </div>
+
+                            <div v-if="$page.props.auth.user.role_id == 1" class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('user.admin')" :active="route().current('user.admin')" >
+                                    Usuarios
+                                </NavLink>
+                            </div>
+                            
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">

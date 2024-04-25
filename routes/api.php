@@ -50,11 +50,3 @@ Route::prefix('expulsion')->group(function () {
     Route::get('/expulsions/{id}', [ExpulsionController::class, 'expulsions'])->name('expulsion.expulsions');
 });
 */
-Route::prefix('user')->group(function () {
-    Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
-    Route::get('/index', [UserController::class, 'index'])->name('user.index');
-    Route::post('/store', [UserController::class, 'store'])->name('user.store');
-    Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
-    Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
-});
-

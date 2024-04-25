@@ -69,4 +69,15 @@ class UserController extends Controller
         $user->save();
         return response()->json(['data' => 'user deleted']);
     }
+
+    public function enable($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['error' => 'user not found'], 404);
+        }
+        $user->is_active = true;
+        $user->save();
+        return response()->json(['data' => 'user enabled']);
+    }
 }

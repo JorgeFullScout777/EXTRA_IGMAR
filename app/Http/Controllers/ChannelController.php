@@ -22,6 +22,12 @@ class ChannelController extends Controller
         return response()->json(['channels' => $channels]);
     }
 
+    public function index_json_admin()
+    {
+        $channels = Channel::all();
+        return response()->json(['channels' => $channels]);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -50,6 +56,9 @@ class ChannelController extends Controller
         if (!$channel) {
             return response()->json(['error' => 'channel not found'], 404);
         }
+        if($channel->user_id != auth()->user()->id){
+            return response()->json(['error' => 'user is not the owner of the channel'], 403);
+        }
         $channel->update($request->all());
         return response()->json(['data' => $channel]);
     }
@@ -60,14 +69,31 @@ class ChannelController extends Controller
         if (!$channel) {
             return response()->json(['error' => 'channel not found'], 404);
         }
+        if($channel->user_id != auth()->user()->id){
+            return response()->json(['error' => 'user is not the owner of the channel'], 403);
+        }
         $channel->is_active = false;
         $channel->save();
         return response()->json(['data' => 'channel deleted']);
     }
 
+    public function enable($id)
+    {
+        $channel = Channel::find($id);
+        if (!$channel) {
+            return response()->json(['error' => 'channel not found'], 404);
+        }
+        $channel->is_active = true;
+        $channel->save();
+        return response()->json(['data' => 'channel enabled']);
+    }
+
     // Trae todos los canales de un usuario
     public function channelsUser($id)
     {
+        if($id != auth()->user()->id || auth()->user()->role_id != 1){
+            return response()->json(['error' => 'user is not the owner of the channel'], 403);
+        }
         $channels = Channel::where('user_id', $id)->where('is_active', true)->get();
         return response()->json(['data' => $channels]);
     }
@@ -77,6 +103,10 @@ class ChannelController extends Controller
         $channel = Channel::find($id);
         if(!$channel){
             return response()->json(['error' => 'channel not found']);
+        }
+        if($channel->user_id != auth()->user()->id || auth()->user()->role_id != 1){
+            return response()->json(['error' => 'user is not the owner of the channel'], 403);
+
         }
         return response()->json(['data' => $channel]);
     }

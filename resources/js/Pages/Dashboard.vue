@@ -44,7 +44,6 @@ export default {
                         this.channels2 = response.data.channels;
                     })
                     .catch(error => {
-                        console.log('mundo');
                         console.log(error);
                     });
             }, 3000);
