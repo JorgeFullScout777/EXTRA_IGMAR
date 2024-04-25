@@ -26,10 +26,10 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
+
+
 
 // NO SUPE EN QUE PARTE VERIFICAR SI EL USUARIO ESTÁ ACTIVO A LA HORA DE INICIAR SESIÓN, ASI QUE LO HICE UN MIDDLEWARE XD
 Route::middleware(['auth', 'user.isactive', 'isactive'])->group(function () {

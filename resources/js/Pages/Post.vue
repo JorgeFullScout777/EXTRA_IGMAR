@@ -13,7 +13,7 @@ import { Head, router } from '@inertiajs/vue3';
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-4">
                         <h3 class="text-lg font-semibold">{{ post2.title }}</h3>
-                        <p class="text-sm text-gray-500">{{ post2.created_at }}</p>
+                        <p class="text-sm text-gray-500">{{ formaterDate(post2.created_at) }}</p>
                         <p class="text-sm text-gray-500">{{ post2.username }}</p>
                         <p class="mt-2">{{ post2.content }}</p>
                         <div>
@@ -34,7 +34,7 @@ import { Head, router } from '@inertiajs/vue3';
                                 <h6 class=" items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
                                     Creado:{{ formaterDate(comment.created_at)}}
                                 </h6>
-                                <h6 class=" items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
+                                <h6 v-if="comment.created_at" class=" items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
                                     Editado:{{ formaterDate(comment.updated_at) }}</h6>
 
                                 <div>
