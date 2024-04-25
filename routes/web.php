@@ -59,7 +59,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('channel')->group(function () {
         Route::get('/crear/{id}', function($id) {
             return Inertia::render('CrearCanal', ['user_id' => $id]);
-        })->name('channel.crear');        Route::get('/index', [ChannelController::class, 'index'])->name('channel.index');
+        })->name('channel.crear');        
+        Route::get('/index', [ChannelController::class, 'index'])->name('channel.index');
+        Route::get('/index/json', [ChannelController::class, 'index_json'])->name('channel.index.json');
         Route::post('/store', [ChannelController::class, 'store'])->name('channel.store');
         Route::put('/update/{id}', [ChannelController::class, 'update'])->name('channel.update');
         Route::delete('/delete/{id}', [ChannelController::class, 'delete'])->name('channel.delete');

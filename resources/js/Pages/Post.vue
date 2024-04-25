@@ -5,7 +5,6 @@ import { Head, router } from '@inertiajs/vue3';
 <template>
     <Head title="Posts" />
     <AuthenticatedLayout>
-        <p>{{post}}</p>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 " style="text-align: center;">Post de {{ post.username }}</h2>
         </template>

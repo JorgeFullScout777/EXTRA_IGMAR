@@ -16,6 +16,12 @@ class ChannelController extends Controller
         return Inertia::render('Dashboard', ['channels' => $channels]);
     }
 
+    public function index_json()
+    {
+        $channels = Channel::where('is_active', true)->get();
+        return response()->json(['channels' => $channels]);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [

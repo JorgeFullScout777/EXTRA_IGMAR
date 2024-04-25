@@ -14,8 +14,9 @@ import { Head } from '@inertiajs/vue3';
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <ul>
-                        <li v-for="channel in channels" :key="channel.id">
+                        <li v-for="channel in channels2" :key="channel.id">
                             <a :href="route('post.posts', { id: channel.id })">{{ channel.name }}</a>
+                            <p>{{ channel.description }}</p>
                             <p class="border-t border-gray-200 mt-4"></p>
                         </li>
                     </ul>
@@ -28,6 +29,32 @@ import { Head } from '@inertiajs/vue3';
 export default {
     props: {
         channels: Object
+    },
+    data() {
+        return {
+            channels2: this.channels,
+        }
+    },
+    methods:{
+        pollRoute() {
+            this.pollInterval = setInterval(() => {
+                axios.get(route('channel.index.json'))
+                    .then(response => {
+                        console.log(response.data);
+                        this.channels2 = response.data.channels;
+                    })
+                    .catch(error => {
+                        console.log('mundo');
+                        console.log(error);
+                    });
+            }, 3000);
+        }
+    },
+    mounted() {
+        this.pollRoute();
+    },
+    beforeUnmount() {
+        clearInterval(this.pollInterval);
     }
 };
 </script>
