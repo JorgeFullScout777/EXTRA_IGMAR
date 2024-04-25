@@ -105,4 +105,23 @@ class PostController extends Controller
         }
         return Inertia::render('Post', ['post' => $post, 'comments'=>$comentarios]);
     }
+
+    public function show_json($id){
+
+        $post = Post::select('posts.id', 'users.id as user_id','users.name as username', 'posts.title', 'posts.content', 'posts.created_at')
+                    ->join('users', 'users.id', '=', 'posts.user_id')
+                    ->where('posts.id', $id)
+                    ->first();
+
+        $comentarios = Comment::select('users.id as user_id','comments.id', 'users.name as username', 'comments.content', 'comments.created_at')
+                ->join('users', 'users.id', '=', 'comments.user_id')
+                ->where('comments.post_id', $id)
+                ->where('comments.is_active', true)
+                ->get();
+
+        if (!$post) {
+            return response()->json(['error' => 'post not found'], 404);
+        }
+        return response()->json(['post' => $post, 'comments'=>$comentarios]);
+    }
 }

@@ -91,7 +91,7 @@ class ChannelController extends Controller
     // Trae todos los canales de un usuario
     public function channelsUser($id)
     {
-        if($id != auth()->user()->id || auth()->user()->role_id != 1){
+        if($id != auth()->user()->id){
             return response()->json(['error' => 'user is not the owner of the channel'], 403);
         }
         $channels = Channel::where('user_id', $id)->where('is_active', true)->get();

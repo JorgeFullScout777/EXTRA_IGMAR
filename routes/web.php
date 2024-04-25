@@ -51,8 +51,10 @@ Route::middleware(['auth', 'user.isactive'])->group(function () {
         Route::middleware('canal.isactive')->group(function () {
             Route::get('/posts/{id}', [PostController::class, 'posts'])->name('post.posts');
         });
-
-        Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
+        Route::middleware('post.isactive')->group(function () {
+            Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
+            Route::get('/show/json/{id}', [PostController::class, 'show_json'])->name('post.show.json');
+        });
 
         // RUTAS POSTS PARA CUALQUIER USUARIO, CADA UNA TIENE VALIDACIONES
         Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
@@ -63,7 +65,7 @@ Route::middleware(['auth', 'user.isactive'])->group(function () {
         Route::get('/index', [PostController::class, 'index'])->name('post.index');
         Route::post('/store', [PostController::class, 'store'])->name('post.store');
         Route::delete('/delete/{id}', [PostController::class, 'delete'])->name('post.delete');
-        Route::get('/posts/user/{id}', [PostController::class, 'postsUser'])->name('post.postsUser');
+        Route::get('/posts/user/{id}', [PostController::class, 'postsUser'])->name('post.posts.user');
     });
 
 
