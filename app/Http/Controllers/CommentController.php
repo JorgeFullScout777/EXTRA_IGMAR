@@ -61,7 +61,11 @@ class CommentController extends Controller
     // trae todos los comentarios activos de un post
     public function comments($id)
     {
-        $comments = Comment::where('post_id', $id)->where('is_active', true)->get();
+        $comments = Comment::select('comments.id', 'users.name as username', 'comments.content', 'comments.created_at')
+            ->join('users', 'users.id', '=', 'comments.user_id')
+            ->where('comments.post_id', $id)
+            ->where('comments.is_active', true)
+            ->get();
         return response()->json(['data' => $comments]);
     }
 }
