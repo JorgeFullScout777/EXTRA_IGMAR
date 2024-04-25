@@ -11,23 +11,19 @@ import Swal from 'sweetalert2';
         </template>
                 <div class="py-12">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"  style="text-align: center;">
-                            <ol class="relative border-s border-gray-200 dark:border-gray-700">
-                      
-    <li class="mb-10 ms-4" >
-
+                        <div v-if="publicaciones==" class="bg-white overflow-hidden shadow-sm sm:rounded-lg"  style="text-align: center;">
+                            <ol class="relative border-s border-gray-200 dark:border-gray-700" v-for="publicacion in publicaciones" :key="publicacion.id">
+    <li  class="mb-10 ms-4" >
         <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">February 2022</time>
-        <button @click="eliminarPost(publicaciones[1].id)" type="button" style="float: right;" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" >Eliminar Post</button>
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-black">TITULO DEL POST</h3>
+        <button @click="eliminarPost(publicacion.id)" type="button" style="float: right;" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" >Eliminar Post</button>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-black">{{publicacion.titulo}}</h3>
         <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">Descripcion del post Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quam omnis voluptatibus quidem doloribus facere assumenda deleniti tenetur! Porro necessitatibus mollitia modi tenetur saepe, perspiciatis odio temporibus repellat harum aliquid!</p>
 
     </li>
     
-</ol>
-                                
-                        
-                        </div>
-                    </div>
+        </ol>
+      </div>
+     </div>
     </div> 
     </AuthenticatedLayout>  
 
@@ -36,6 +32,10 @@ import Swal from 'sweetalert2';
 <script>
 
 export default {
+
+    props: {
+        publicaciones: Array
+    },
     data() {
         return {
             publicaciones: [

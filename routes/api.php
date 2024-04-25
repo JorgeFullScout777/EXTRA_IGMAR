@@ -57,6 +57,7 @@ Route::prefix('comment')->group(function () {
     Route::get('/comments/{id}', [CommentController::class, 'comments'])->name('comment.comments');
 });
 
+/*
 Route::prefix('message')->group(function () {
     Route::get('/index', [MessageController::class, 'index'])->name('message.index');
     Route::post('/store', [MessageController::class, 'store'])->name('message.store');
@@ -72,7 +73,7 @@ Route::prefix('expulsion')->group(function () {
     Route::delete('/delete/{id}', [ExpulsionController::class, 'delete'])->name('expulsion.delete');
     Route::get('/expulsions/{id}', [ExpulsionController::class, 'expulsions'])->name('expulsion.expulsions');
 });
-
+*/
 Route::prefix('user')->group(function () {
     Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
     Route::get('/index', [UserController::class, 'index'])->name('user.index');
@@ -80,3 +81,4 @@ Route::prefix('user')->group(function () {
     Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 });
+

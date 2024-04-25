@@ -6,7 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Validator;
-
+use Inertia\Inertia;
 class PostController extends Controller
 {
     // trae todos los posts activos
@@ -81,6 +81,6 @@ class PostController extends Controller
         if (!$post) {
             return response()->json(['error' => 'post not found'], 404);
         }
-        return response()->json(['data' => $post,'comments'=>$comentarios]);
+        return Inertia::render('post/publicacion', ['post' => $post,'comments'=>$comentarios]);
     }
 }

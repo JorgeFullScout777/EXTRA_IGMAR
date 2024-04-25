@@ -33,7 +33,11 @@ const showingNavigationDropdown = ref(false);
                                     Mis Publicaciones
                                 </NavLink>
                             </div>
-
+                            <div v-if="$page.props.auth.user.rol"  class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('mispublicaciones')" :active="route().current('mispublicaciones')" >
+                                    Mis Publicaciones
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
