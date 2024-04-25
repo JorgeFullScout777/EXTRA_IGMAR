@@ -17,7 +17,7 @@ import { Head } from '@inertiajs/vue3';
                         <li v-for="channel in channels2" :key="channel.id">
                             <a :href="route('post.posts', { id: channel.id })">{{ channel.name }}</a>
                             <p>{{ channel.description }}</p>
-                            <button v-if="channel.is_active && channel.user_id == $page.props.auth.user.id" @click="deleteChannel(user)" class="text-red-600 hover:text-red-900">Eliminar</button>
+                            <button v-if="channel.is_active && channel.user_id == $page.props.auth.user.id" @click="deleteChannel(channel)" class="text-red-600 hover:text-red-900">Eliminar</button>
                             <p class="border-t border-gray-200 mt-4"></p>
                         </li>
                     </ul>
