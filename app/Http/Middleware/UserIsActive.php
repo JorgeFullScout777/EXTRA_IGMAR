@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 class UserIsActive
 {
     /**
@@ -19,6 +21,8 @@ class UserIsActive
         if (auth()->user()->is_active) {
             return $next($request);
         }
-        return response()->json(['error' => 'user is not active'], 403);
+        Auth::logout();
+        $Data=["Error"=>"La cuenta esta desactivada", "Codigo"=>"410"];
+        return inertia::render('error', ["Data"=>$Data]);
     }
 }

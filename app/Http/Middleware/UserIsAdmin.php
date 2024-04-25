@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
 class UserIsAdmin
 {
     /**
@@ -19,6 +19,7 @@ class UserIsAdmin
         if (auth()->user()->role_id == 1) {
             return $next($request);
         }
-        return response()->json(['error' => 'user is not admin'], 403);
+        $Data=["Error"=>"No eres administrador", "Codigo"=>"403"];
+        return inertia::render('error', ["Data"=>$Data]);
     }
 }
