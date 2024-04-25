@@ -99,7 +99,10 @@ Route::middleware(['auth', 'user.isactive'])->group(function () {
         Route::post('/store', [ChannelController::class, 'store'])->name('channel.store');
         Route::put('/update/{id}', [ChannelController::class, 'update'])->name('channel.update');
         Route::delete('/delete/{id}', [ChannelController::class, 'delete'])->name('channel.delete');
-        Route::get('/channels/user/{id}', [ChannelController::class, 'channelsUser'])->name('channel.channelsUser');
+        Route::get('/user', function() {
+            return Inertia::render('MyChannels');
+        })->name('channel.user'); 
+        Route::get('/channels/user/{id}', [ChannelController::class, 'channelsUser'])->name('channel.channels.user');
     });
 
 
