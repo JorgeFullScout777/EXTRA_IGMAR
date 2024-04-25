@@ -9,6 +9,7 @@ import { Head, router } from '@inertiajs/vue3';
             <h2 class="font-semibold text-xl text-gray-800 " style="text-align: center;">Post de {{ post.username }}</h2>
         </template>
         <div class="py-12">
+            <p>{{ post }}</p>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-4">
@@ -16,6 +17,10 @@ import { Head, router } from '@inertiajs/vue3';
                         <p class="text-sm text-gray-500">{{ post.created_at }}</p>
                         <p class="text-sm text-gray-500">{{ post.username }}</p>
                         <p class="mt-2">{{ post.content }}</p>
+                        <div>
+                                    <button type="button" @click="editpost(post.id,)" v-if="post.user_id==$page.props.auth.user.id"  class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Editar</button>
+                                    <button type="button" @click="eliminarpost(post.id)" v-if="post.user_id==$page.props.auth.user.id || $page.props.auth.user.rol_id==1" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Eliminar</button>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-8"></div>
@@ -156,7 +161,75 @@ export default {
         });
     },formaterDate(date){
         return new Date(date).toLocaleString();
-    }
+    },
+    eliminarpost(id) {
+        Swal.fire({
+            title: '¿Estás seguro de querer eliminar el post?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/post/delete/${id}`)
+                    .then(response => {
+                        Swal.fire(
+                            'Eliminado',
+                            'El post ha sido eliminado.',
+                            'success'
+                        );
+                        router.push('/mispublicaciones');
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Error',
+                            'No se ha podido eliminar el post.',
+                            'error'
+                        );
+                    });
+            }
+        });
+    },editpost(id) {
+        Swal.fire({
+            title: 'Editar post',
+            html:  `
+    <input id="titulo" value="${this.post.title}" class="swal2-input">
+    <textarea id="contenido" class="swal2-textarea">${this.post.content}</textarea>
+  ` ,
+            inputValue: this.post.content,
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Editar',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+             var a = document.getElementById('titulo').value
+              var b = document.getElementById('contenido').value 
+              console.log(a,b)
+                axios.put(`/post/update/${id}`, { content: b, title: a})
+                    .then(response => {
+                        Swal.fire(
+                            'Editado',
+                            'El post ha sido editado.',
+                            'success'
+                        );
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Error',
+                            'No se ha podido editar el post.',
+                            'error'
+                        );
+                        console.error(error);
+                    });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }); 
+    },
+
+
     },
     mounted() {
         this.pollRoute();
