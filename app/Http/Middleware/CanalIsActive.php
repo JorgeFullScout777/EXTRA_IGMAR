@@ -22,7 +22,10 @@ class CanalIsActive
             if (!$channel) {
                 return response()->json(['error' => 'channel not found'], 404);
             }
-            if (!$channel->is_active && auth()->user()->role_id != 1){
+            if (auth()->user()->role_id == 1){
+                return $next($request);
+            }
+            if (!$channel->is_active){
                 return response()->json(['error' => 'channel is not active'], 404);
             }
         }

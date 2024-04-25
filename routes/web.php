@@ -50,9 +50,9 @@ Route::middleware(['auth', 'user.isactive'])->group(function () {
         // MIDDLEWARE PARA VERIFICAR SI EL CANAL DE LOS POSTS ESTÁ ACTIVO
         Route::middleware('canal.isactive')->group(function () {
             Route::get('/posts/{id}', [PostController::class, 'posts'])->name('post.posts');
-            Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
         });
 
+        Route::get('/show/{id}', [PostController::class, 'show'])->name('post.show');
 
         // RUTAS POSTS PARA CUALQUIER USUARIO, CADA UNA TIENE VALIDACIONES
         Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
