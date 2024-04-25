@@ -6,7 +6,7 @@ import { Head } from '@inertiajs/vue3';
     <Head title="Principal" />
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 " style="text-align: center;">Canales</h2>
+            <h2 class="font-semibold text-xl text-gray-800 " style="text-align: center;">Usuarios</h2>
         </template>
 
         <div class="py-12">
@@ -23,6 +23,9 @@ import { Head } from '@inertiajs/vue3';
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Email
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Rol
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Acciones
@@ -58,8 +61,18 @@ import { Head } from '@inertiajs/vue3';
                                         </div>
                                     </div>
                                 </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                <p v-if="user.role_id == 1">Administrador</p>
+                                                <p v-if="user.role_id == 2">Usuario</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <!-- <button @click="editChannel(user)" class="text-indigo-600 hover:text-indigo-900">Editar</button> -->
+                                    <button @click="editChannel(user)" class="text-indigo-600 hover:text-indigo-900">Editar</button>
                                     <button v-if="user.is_active" @click="deleteChannel(user)" class="text-red-600 hover:text-red-900">Desactivar</button>
                                     <button v-if="!user.is_active" @click="enableChannel(user)" class="text-green-600 hover:text-red-900">Activar</button>
                                 </td>

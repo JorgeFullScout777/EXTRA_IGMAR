@@ -16,7 +16,6 @@ import { Head } from '@inertiajs/vue3';
                     <ul>
                         <li v-for="post in posts2" :key="post.id">
                             <a :href="route('post.show', { id: post.id })">{{ post.title }}</a>
-                            <button v-if="post.is_active && post.user_id == $page.props.auth.user.id" @click="deletePost(post)" class="text-red-600 hover:text-red-900">Eliminar</button>
                             <p class="border-t border-gray-200 mt-4"></p>
                         </li>
                     </ul>
@@ -53,15 +52,6 @@ export default {
                         console.log(error);
                     });
             }, 3000);
-        },
-        deletePost(post) {
-            axios.delete(route('post.delete', { id: post.id }))
-                .then(response => {
-                    console.log('post desactivado:', response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
         },
     },
     mounted() {

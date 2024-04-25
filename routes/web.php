@@ -57,6 +57,7 @@ Route::middleware(['auth', 'user.isactive'])->group(function () {
         });
 
         // RUTAS POSTS PARA CUALQUIER USUARIO, CADA UNA TIENE VALIDACIONES
+
         Route::put('/update/{id}', [PostController::class, 'update'])->name('post.update');
         Route::get('/posts/json/{id}', [PostController::class, 'posts_json'])->name('post.posts.json');
         Route::get('/crear/{id}', function($id) {
@@ -90,6 +91,9 @@ Route::middleware(['auth', 'user.isactive'])->group(function () {
             Route::get('/index/json/admin', [ChannelController::class, 'index_json_admin'])->name('channel.index.json.admin');
             Route::put('/enable/{id}', [ChannelController::class, 'enable'])->name('channel.enable');
         });
+
+        Route::get('/editar/{id}', [ChannelController::class, 'info_channel'])->name('channel.editar');
+
 
 
         // RUTAS PARA CUALQUIER USUARIO, CADA UNA TIENE VALIDACIONES

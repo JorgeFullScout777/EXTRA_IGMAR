@@ -45,7 +45,6 @@ class ChannelController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required',
             'name' => 'required|max:40',
             'description' => 'required|max:200|nullable'
         ]);
@@ -96,6 +95,14 @@ class ChannelController extends Controller
         }
         $channels = Channel::where('user_id', $id)->where('is_active', true)->get();
         return response()->json(['data' => $channels]);
+    }
+
+    public function info_channel($id){
+        $channel = Channel::find($id);
+        if(!$channel){
+            return response()->json(['error' => 'channel not found']);
+        }
+        return Inertia::render('EditarCanal', ['channel' => $channel]);
     }
 
     // Trae la informacion de un solo channel
