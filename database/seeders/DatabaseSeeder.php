@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            ['name' => 'JorgeFullScout',  'email' => 'jorgefullscout@gmail.com',  'password' => Hash::make('password'), 'role_id' => 1],
-            ['name' => 'Diana',  'email' => 'diana.itzel@gmail.com',  'password' => Hash::make('password'), 'role_id' => 2],
-            ['name' => 'Erick',  'email' => 'laloelrick@gmail.com',  'password' => Hash::make('password'), 'role_id' => 2],
+            ['name' => 'JorgeFullScout',  'email' => 'jorgefullscout@gmail.com',  'password' => Hash::make('password'), 'role_id' => 1, 'status' => 1],
+            ['name' => 'Diana',  'email' => 'diana.itzel@gmail.com',  'password' => Hash::make('password'), 'role_id' => 2, 'status' => 1],
+            ['name' => 'Erick',  'email' => 'laloelrick@gmail.com',  'password' => Hash::make('password'), 'role_id' => 2, 'status' => 1],
         ]);
 
         // DB::table('communities')->insert([

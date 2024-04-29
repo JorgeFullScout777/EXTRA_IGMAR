@@ -34,7 +34,7 @@
           async submit() {
               try {
                 
-                 this.$inertia.post('http://127.0.0.1:8000/verificar', this.form);
+                 this.$inertia.post(route('verify'), this.form);
               } catch (error) {
                   console.error(error);
               }

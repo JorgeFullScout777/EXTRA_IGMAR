@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'post.isactive' => \App\Http\Middleware\PostIsActive::class,
         'isactive' => \App\Http\Middleware\IsActiveMiddleware::class,
         'codigo' => \App\Http\Middleware\codigo::class,
+        'email.isactive' => \App\Http\Middleware\EmailIsActive::class,
     ];
 }

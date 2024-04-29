@@ -16,7 +16,18 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+        onFinish: () => {
+            form.reset('password', 'password_confirmation');
+            // Redirect to a different page after successful registration
+            // You can replace '/dashboard' with the desired URL
+            alert('Registrado exitosamnete. Revise su correo electronico para activar su cuenta.');
+            window.location.href = '/login';
+        },
+        onError: (errors) => {
+            form.errors.record(errors);
+            // Show an alert with the error message
+            alert('Registration failed. Please check your inputs and try again.');
+        },
     });
 };
 </script>
