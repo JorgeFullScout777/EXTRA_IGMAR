@@ -19,7 +19,7 @@ class UserIsAdmin
         if (auth()->user()->role_id == 1) {
             return $next($request);
         }
-        $Data=["Error"=>"No eres administrador", "Codigo"=>"403"];
+        $Data=["Error"=>"No eres administrador", "Codigo"=>"403","url"=>"/"];
         return inertia::render('error', ["Data"=>$Data]);
     }
 }

@@ -30,12 +30,14 @@ const submit = () => {
     <GuestLayout>
         <Head title="Log in" />
 
-        <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-            {{ status }}
-        </div>
+  
 
         <form @submit.prevent="submit">
+            <div v-if="message" class="mb-4 font-medium text-sm text-green-600">
+            {{ message }}asdsada
+        </div>
             <div>
+      
                 <InputLabel for="email" value="Email" />
 
                 <TextInput
@@ -91,3 +93,12 @@ const submit = () => {
         </form>
     </GuestLayout>
 </template>
+
+<script>
+import axios from 'axios';
+export default {
+    props: {
+        message: Object,
+    }
+}
+</script>

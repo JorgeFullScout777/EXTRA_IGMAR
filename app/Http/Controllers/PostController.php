@@ -72,7 +72,8 @@ class PostController extends Controller
     // Trae todos los post de un canal
     public function posts($ChannelId){
         $posts = Post::where('channel_id', $ChannelId)->where('is_active', true)->get();
-        return Inertia::render('Posts', ['posts' => $posts, 'channel_id' => $ChannelId]);
+        $channel = Channel::select('channels.name')->where('channels.id', $ChannelId)->first();
+        return Inertia::render('Posts', ['posts' => $posts, 'channel_id' => $ChannelId,'channel_name' => $channel->name]);
     }
 
     public function posts_admin($ChannelId){
@@ -88,6 +89,7 @@ class PostController extends Controller
             }
         }
         $posts = Post::where('channel_id', $ChannelId)->where('is_active', true)->get();
+        
         return response()->json(['posts' => $posts, 'channel_id' => $ChannelId]);
     }
 
@@ -111,7 +113,7 @@ class PostController extends Controller
                     ->where('posts.id', $id)
                     ->first();
 
-        $comentarios = Comment::select('comments.id', 'users.name as username', 'comments.content', 'comments.created_at')
+        $comentarios = Comment::select('comments.id', 'users.name as username', 'comments.content', 'comments.created_at','comments.updated_at')
                 ->join('users', 'users.id', '=', 'comments.user_id')
                 ->where('comments.post_id', $id)
                 ->where('comments.is_active', true)
@@ -130,7 +132,7 @@ class PostController extends Controller
                     ->where('posts.id', $id)
                     ->first();
 
-        $comentarios = Comment::select('users.id as user_id','comments.id', 'users.name as username', 'comments.content', 'comments.created_at')
+        $comentarios = Comment::select('users.id as user_id','comments.id', 'users.name as username', 'comments.content', 'comments.created_at','comments.updated_at')
                 ->join('users', 'users.id', '=', 'comments.user_id')
                 ->where('comments.post_id', $id)
                 ->where('comments.is_active', true)

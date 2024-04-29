@@ -19,11 +19,6 @@ use Illuminate\Support\Facades\URL;
 
 class RegisteredUserController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['active']]);
-    }
     /**
      * Display the registration view.
      */
@@ -59,13 +54,8 @@ class RegisteredUserController extends Controller
         );
 
         Mail::to($user->email)->send(new ActiveMail($signed_route,$user->name));
-        return response()->json([
-            'msg'   =>  "Usuario registrado correctamente, revisa tu correo",
-            'data'  =>  $user
-        ],201);
-
+        return Inertia::render('Auth/Login',['message'=>'Usuario registrado correctamente, revisa tu correo Para activar tu cuenta']);
         event(new Registered($user));
-
         Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);

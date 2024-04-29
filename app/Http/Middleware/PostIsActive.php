@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Inertia\Inertia;
 
 class PostIsActive
 {
@@ -20,7 +21,8 @@ class PostIsActive
         if ($request->route('id')) {
             $post = Post::find($request->route('id'));
             if (!$post) {
-                return response()->json(['error' => 'post not found'], 404);
+                $Data=["Error"=>"Post no encontrado", "Codigo"=>"404","url"=>"/channel/index"];
+                return Inertia::render('error', ["Data"=>$Data]);
             }
             if (auth()->user()->role_id == 1){
                 return $next($request);

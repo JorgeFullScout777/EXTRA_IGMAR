@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\Channel;
+use Inertia\Inertia;
 
 class CanalIsActive
 {
@@ -20,7 +21,8 @@ class CanalIsActive
         if ($request->route('id')) {
             $channel = Channel::find($request->route('id'));
             if (!$channel) {
-                return response()->json(['error' => 'channel not found'], 404);
+                $Data=["Error"=>"Canal no encontrado", "Codigo"=>"404","url"=>" /channel/index"];
+                return Inertia::render('error', ["Data"=>$Data]);
             }
             if (auth()->user()->role_id == 1){
                 return $next($request);

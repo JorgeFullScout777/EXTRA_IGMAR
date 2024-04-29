@@ -20,7 +20,7 @@ class IsActiveMiddleware
         if(!auth()->user()->status){        
             
             Auth::logout();
-            $Data=["Error"=>"La cuenta no esta activa", "Codigo"=>"401"];
+            $Data=["Error"=>"La cuenta no esta activa", "Codigo"=>"401","url"=>"/"];
             return inertia::render('error', ["Data"=>$Data]);
         }
         return $next($request);    }

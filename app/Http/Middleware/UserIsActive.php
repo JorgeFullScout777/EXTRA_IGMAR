@@ -22,7 +22,7 @@ class UserIsActive
             return $next($request);
         }
         Auth::logout();
-        $Data=["Error"=>"La cuenta esta desactivada", "Codigo"=>"410"];
+        $Data=["Error"=>"La cuenta esta desactivada", "Codigo"=>"410","url"=>"/"];
         return inertia::render('error', ["Data"=>$Data]);
     }
 }

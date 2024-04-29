@@ -38,6 +38,10 @@ class AuthenticatedSessionController extends Controller
         $verificacioncode = Str::random(6);
 
         $user = Auth::user();
+        if($user->status==0)
+        {
+            return redirect()->route('login');
+        }
         $user->code = $verificacioncode;
         $user->save();
         Mail::to($user->email)->send(new Login($verificacioncode));

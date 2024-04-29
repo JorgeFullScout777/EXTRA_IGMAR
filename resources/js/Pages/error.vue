@@ -13,7 +13,7 @@ export default {
     methods: {
         redirect() {
             setTimeout(() => {
-                window.location.href = '/';
+                window.location.href = this.Data.url;
             }, 3000);
         }
     }
