@@ -38,7 +38,7 @@
         }
 
         table{
-            background-image: url('https://i.ibb.co/5M0zRH3/portadaplants.jpg'); 
+            background-image: url('https://i.blogs.es/0ca9a6/aa/1366_2000.webp'); 
             background-size: cover; 
             background-repeat: no-repeat;
             width: 70%;
@@ -68,7 +68,7 @@
         <tr>
             <td align="center">
                 <div class="container">
-                    <h1>Tu codigo de Life Plants</h1>
+                    <h1>Tu codigo de Logeo es</h1>
                     <a class="button">{{$code}}</a>
                 </div>
             </td>

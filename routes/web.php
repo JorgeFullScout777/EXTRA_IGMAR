@@ -10,7 +10,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,10 +29,13 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/verificacion', [AuthenticatedSessionController::class, 'verifyshow'])->name('verificacion.show');
+Route::post('/verificar', [AuthenticatedSessionController::class, 'codigo'])->name('verify');
+
 
 
 // NO SUPE EN QUE PARTE VERIFICAR SI EL USUARIO ESTÁ ACTIVO A LA HORA DE INICIAR SESIÓN, ASI QUE LO HICE UN MIDDLEWARE XD
-Route::middleware(['auth', 'user.isactive', 'isactive'])->group(function () {
+Route::middleware(['auth', 'user.isactive', 'isactive','codigo'])->group(function () {
 
     // ES SOLO UNA PRUEBA PARA SABER EL ROL_ID DEL USUARIO
     Route::get('/userAdmin', function() {

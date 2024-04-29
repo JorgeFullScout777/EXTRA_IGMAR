@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'user.isactive' => \App\Http\Middleware\UserIsActive::class,
         'post.isactive' => \App\Http\Middleware\PostIsActive::class,
         'isactive' => \App\Http\Middleware\IsActiveMiddleware::class,
+        'codigo' => \App\Http\Middleware\codigo::class,
     ];
 }
