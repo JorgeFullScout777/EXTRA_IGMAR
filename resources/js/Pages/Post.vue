@@ -185,7 +185,7 @@ export default {
                             'El post ha sido eliminado.',
                             'success'
                         );
-                        router.get(route('channel.index'))
+                        window.history.back();
                     })
                     .catch(error => {
                         Swal.fire(
